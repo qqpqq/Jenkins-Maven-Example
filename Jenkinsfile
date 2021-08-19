@@ -3,9 +3,11 @@ pipeline {
         label 'linuxAgent1'
     }
     stages {
-        stage("Test") {
+        stage('Gradle Static Analysis') {
             steps {
-                sh "mvn test"
+                withSonarQubeEnv('SonarQube-Server') {
+                    sh './mvn sonar:sonar'
+                }
             }
         }
         stage("Build") {
