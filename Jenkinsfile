@@ -6,7 +6,7 @@ pipeline {
         stage('Gradle Static Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube-Server') {
-                    sh './mvn sonar:sonar'
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
