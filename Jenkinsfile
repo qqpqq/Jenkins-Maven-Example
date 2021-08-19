@@ -18,7 +18,7 @@ pipeline {
         stage('Jacoco') {
             steps {
                 jacoco (execPattern: '**/target/*.exec',
-                        classPattern: '**/target/classes/java,**/target/classes/groovy',
+                        classPattern: '**/target/classes',
                         inclusionPattern: '**/*.class',
                         exclusionPattern: '**/test/**,**/integrationTest**,**/*Test.class,**/Q*.class,**/config/**/*.class',
                         sourcePattern: '**/src/main/java',
