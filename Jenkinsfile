@@ -1,13 +1,20 @@
-node("linuxAgent1") {
+pipeline {
+    agent 'linuxAgent1'
     stages {
-        stage("Checkout"){
-            checkout scm
+        stage("Checkout") {
+            steps {
+                checkout scm
+            }
         }
         stage("Test") {
-            sh "mvn test"
+            steps {
+                sh "mvn test"
+            }
         }
         stage("Build") {
-            sh "mvn install"
+             steps {
+                sh "mvn install"
+            }
         }
     }
 }
