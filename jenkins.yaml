@@ -1,0 +1,61 @@
+pipeline:
+  node: linuxAgent1
+  stages:
+    - name: Code Checkout
+      run:
+        checkout:
+          branches: [ main ]
+          userRemoteConfigs:
+            - credentialsId: 'mallycrip'
+              url: 'https://github.com/qqpqq/Jenkins-Maven-Example.git'
+
+      alert:
+        failed:
+          message: 'Code Checkout Failed'
+
+    - name: Test Execution
+      run:
+        sh:
+          script: |
+            mvn clean test
+
+      alert:
+        failed:
+          message: 'Test Failed'
+
+    - name: Dynamic Analysis
+      run:
+        jacoco:
+          execPattern: '**/target/*.exec'
+          classPattern: '**/target/classes'
+          inclusionPattern: '**/*.class'
+          exclusionPattern: '**/test/**,**/integrationTest**,**/*Test.class,**/Q*.class,**/config/**/*.class'
+          sourcePattern: '**/src/main/java'
+          sourceInclusionPattern: '**/*.java'
+          buildOverBuild: true
+          changeBuildStatus: true
+          send_coverage: true
+          xml_path: 'target/site/jacoco/jacoco.xml'
+
+      alert:
+        failed:
+          message: 'Dynamic Analysis Failed'
+
+    - name: Static Analysis
+      run:
+        withSonarQubeEnv:
+          sh:
+            script: mvn clean sonar:sonar
+
+      alert:
+        failed:
+          message: 'Static Analysis Failed'
+
+    - name: Build
+      run:
+        sh:
+          script: mvn clean install
+
+      alert:
+        failed:
+          message: 'Static Analysis Failed'
