@@ -15,8 +15,7 @@ pipeline:
     - name: Test Execution
       run:
         sh:
-          script: |
-            mvn clean test
+          script: mvn clean test
       alert:
         failed:
           message: 'Test Failed'
