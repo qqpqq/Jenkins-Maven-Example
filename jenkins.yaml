@@ -41,7 +41,7 @@ pipeline:
     - name: Static Analysis
       run:
         withSonarQubeEnv:
-          alert: false
+          alert: true
           sh:
             script: mvn clean sonar:sonar
       alert:
