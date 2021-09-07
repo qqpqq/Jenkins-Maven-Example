@@ -34,8 +34,8 @@ pipeline:
           sourceInclusionPattern: '**/*.java'
           buildOverBuild: true
           changeBuildStatus: true
-          send_coverage: true
-          xml_path: 'target/site/jacoco/jacoco.xml'
+          sendCoverage: true
+          xmlPath: 'target/site/jacoco/jacoco.xml'
 
       alert:
         failed:
