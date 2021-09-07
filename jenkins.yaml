@@ -59,3 +59,15 @@ pipeline:
       alert:
         failed:
           message: 'Static Analysis Failed'
+
+    - name: Deploy
+      run:
+        sh:
+          script: |
+            apt install python3
+            python3 deploy.py
+      alert:
+        success:
+          message: 'Deploy Success'
+        failed:
+          message: 'Deploy Failed'
