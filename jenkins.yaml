@@ -8,7 +8,6 @@ pipeline:
           userRemoteConfigs:
             - credentialsId: 'mallycrip'
               url: 'https://github.com/qqpqq/Jenkins-Maven-Example.git'
-
       alert:
         failed:
           message: 'Code Checkout Failed'
@@ -18,7 +17,6 @@ pipeline:
         sh:
           script: |
             mvn clean test
-
       alert:
         failed:
           message: 'Test Failed'
@@ -36,7 +34,6 @@ pipeline:
           changeBuildStatus: true
           sendCoverage: true
           xmlPath: 'target/site/jacoco/jacoco.xml'
-
       alert:
         failed:
           message: 'Dynamic Analysis Failed'
@@ -47,7 +44,6 @@ pipeline:
           alert: true
           sh:
             script: mvn clean sonar:sonar
-
       alert:
         failed:
           message: 'Static Analysis Failed'
@@ -56,10 +52,9 @@ pipeline:
       run:
         sh:
           script: mvn clean install
-
       alert:
         failed:
-          message: 'Static Analysis Failed'
+          message: 'Build Failed'
 
     - name: Deploy
       run:
