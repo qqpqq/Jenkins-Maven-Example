@@ -42,7 +42,7 @@ pipeline:
         withSonarQubeEnv:
           alert: true
           sh:
-            script: mvn clean sonar:sonar
+            script: mvn sonar:sonar
       alert:
         failed:
           message: 'Static Analysis Failed'
