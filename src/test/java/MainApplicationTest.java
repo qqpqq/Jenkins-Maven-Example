@@ -7,6 +7,6 @@ public class MainApplicationTest {
     @Test
     public void testSayHello() {
         MainApplication main = new MainApplication();
-        assertEquals(main.sayHello(), "");
+        assertEquals(main.sayHello(), " ");
     }
 }
